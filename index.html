@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleet Compliance Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>🛡️ FleetGuard</h2>
+        <a href="#" class="active">Live Dashboard</a>
+        <a href="/api/export/excel" class="btn-download">📊 Download Excel Report</a>
+        <a href="/api/auth/logout" class="btn-logout">🔒 Secure Logout</a>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>Document Tracking Center</h1>
+            <p>Real-time local vehicle document compliance database dashboard.</p>
+        </header>
+        <div class="kpi-grid">
+            <div class="card total"><h3>Monitored Vehicles</h3><p class="num" id="kpiTotal">0</p></div>
+            <div class="card alert"><h3>Urgent Actions</h3><p class="num" id="kpiAlert">0</p></div>
+            <div class="card secure"><h3>Compliant Units</h3><p class="num" id="kpiSecure">0</p></div>
+        </div>
+        <div class="workspace-split">
+            <div class="form-container">
+                <h3>Register Fleet Vehicle</h3>
+                <form action="/api/vehicles/add" method="POST">
+                    <div class="form-group"><label>Registration Number</label><input type="text" name="reg_number" placeholder="e.g., MH-12-AB-1234" required></div>
+                    <div class="form-group"><label>Vehicle Model / Class</label><input type="text" name="model" placeholder="e.g., Tata Truck" required></div>
+                    <div class="form-group"><label>Insurance Expiry Date</label><input type="date" name="insurance_expiry" required></div>
+                    <div class="form-group"><label>Fitness Certificate Expiry</label><input type="date" name="fitness_expiry" required></div>
+                    <button type="submit" class="btn-submit">Add to Database</button>
+                </form>
+            </div>
+            <div class="table-container">
+                <div class="search-wrapper-box"><input type="text" id="tableSearchBox" placeholder="🔍 Search by registration number..." onkeyup="filterFleetLedger()"></div>
+                <h3>Vehicle Expiry Ledger</h3>
+                <table id="fleetTable">
+                    <thead><tr><th>Registration No.</th><th>Insurance Expiry</th><th>Fitness Expiry</th><th>Compliance State</th><th>Actions</th></tr></thead>
+                    <tbody id="fleetTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="table-container data-audit-margin">
+            <h3>System Activity Logs & Security Audit Trails</h3>
+            <table id="auditTable">
+                <thead><tr><th>Timestamp</th><th>Operator</th><th>Operation</th><th>Activity Data Details Ledger</th></tr></thead>
+                <tbody id="auditTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-overlay" id="alertModal">
+        <div class="modal-box">
+            <div class="modal-header"><h3>⚠️ Action Required: Document Expirations</h3></div>
+            <div class="modal-body"><ul id="alertList"></ul></div>
+            <div class="modal-footer"><button class="btn-close" onclick="closeModal()">Acknowledge & Dismiss</button></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

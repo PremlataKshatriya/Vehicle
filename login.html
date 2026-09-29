@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fleet Compliance Guard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <h2>🛡️ FleetGuard Security</h2>
+        <p>Please log in to manage data entry and view active tracking dashboards.</p>
+        <form action="/api/auth/login" method="POST">
+            <div class="form-group"><label>User Identity ID / Username</label><input type="text" name="username" placeholder="Enter username" required></div>
+            <div class="form-group"><label>Security Password</label><input type="password" name="password" placeholder="Enter password" required></div>
+            <div class="form-group-checkbox"><input type="checkbox" id="remember_me" name="remember_me"><label for="remember_me">Keep me logged in on this computer (7 Days)</label></div>
+            <button type="submit" class="btn-submit">Authenticate Secure Login</button>
+        </form>
+    </div>
+</body>
+</html>
